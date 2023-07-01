@@ -1,11 +1,14 @@
 # Appworks-School-Blockchain-Final-Project
 - Description
-    - Provide a brief overview of the project, including its purpose, goals, and any relevant background information.
+    - The primary goal of this project is to understand the Uniswap V4 codebase and develop additional functionality on top of it. After brainstorming, I have come up with the following directions:
+        - ISwapRouter for Uniswap V4: This component will encapsulate the primary interactions with Uniswap V4, allowing seamless integration and interaction with the protocol.
+        - Custom Hooks with Customized Functionality: I plan to develop custom hooks that offer personalized functionality.
 
 - Framework
-    - Describe different components or modules in your project and their responsibilities respectively. This section should highlights the key functionalities or features that each component contributes to the overall project.
-    - Illustrate the overall workflow or process involved in the project.
-    - [Nice to have] You can use flowcharts or diagrams to visualize the sequence of steps or interactions between components.
+    - Foundry
+    - Diagrams of Uniswap@v4
+        - Add/Remove Liquidity
+        - Swap
 
 - Development
     - Include step-by-step instructions on how to set up and run the project.
