@@ -1,6 +1,8 @@
 [profile.default]
-src = "src"
+src = "contracts"
 out = "out"
 libs = ["lib"]
+ffi = true
+fs_permissions = [{ access = "read-write", path = ".forge-snapshots/"}, { access = "read", path = "./out"}]
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
