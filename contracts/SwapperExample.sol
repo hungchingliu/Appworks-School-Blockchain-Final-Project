@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.19;
+
 import {CurrencyLibrary, Currency} from "v4-core/libraries/CurrencyLibrary.sol";
 import {IERC20Minimal} from "v4-core/interfaces/external/IERC20Minimal.sol";
 
