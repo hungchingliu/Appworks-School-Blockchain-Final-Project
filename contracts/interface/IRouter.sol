@@ -8,10 +8,10 @@ interface IRouter {
    function swap(
         IPoolManager.PoolKey memory key,
         IPoolManager.SwapParams memory params
-    ) external payable returns (BalanceDelta);
+    ) external payable returns (BalanceDelta delta);
 
-    function modifyPosition(IPoolManager.PoolKey memory key, IPoolManager.ModifyPositionParams memory params)
-        external
-        payable
-        returns (BalanceDelta delta); 
+    function modifyPosition(
+        IPoolManager.PoolKey memory key, 
+        IPoolManager.ModifyPositionParams memory params
+    ) external payable returns (BalanceDelta delta); 
 }
