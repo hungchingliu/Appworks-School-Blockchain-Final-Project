@@ -2,11 +2,11 @@
 pragma solidity ^0.8.19;
     
 import "forge-std/Test.sol";
-import {PoolManagerSetUp} from "../helper/PoolManagerSetUp.sol";
+import {PoolManagerSetUp} from "./helper/PoolManagerSetUp.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/libraries/PoolId.sol";
 import {IPoolManager} from "v4-core/interfaces/IPoolManager.sol";
-import {IRouter} from "../../contracts/interface/IRouter.sol";
-import {Router} from "../../contracts/Router.sol";
+import {IRouter} from "../contracts/interface/IRouter.sol";
+import {Router} from "../contracts/Router.sol";
 
 contract SwapperTest is PoolManagerSetUp {
     
