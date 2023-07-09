@@ -10,13 +10,15 @@ import {ILockCallback} from "v4-core/interfaces/callback/ILockCallback.sol";
 import {IPoolManager} from "v4-core/interfaces/IPoolManager.sol";
 import {BalanceDelta} from "v4-core/types/BalanceDelta.sol";
 
+import {Ownable} from "openzeppelin/access/Ownable.sol";
 
-contract RouterExample is ILockCallback, IRouterExample {
+// RouterExample is ownable because this contract will hold ERC1155 and Liquidity Position 
+contract RouterExample is Ownable, ILockCallback, IRouterExample {
     using CurrencyLibrary for Currency;
 
     IPoolManager public immutable manager;
 
-    constructor(IPoolManager _manager) {
+    constructor(IPoolManager _manager) Ownable() {
         manager = _manager;
     }
 
@@ -32,7 +34,7 @@ contract RouterExample is ILockCallback, IRouterExample {
     function swap(
         IPoolManager.PoolKey memory key,
         IPoolManager.SwapParams memory params
-    ) external payable returns (BalanceDelta delta) {
+    ) external payable onlyOwner returns (BalanceDelta delta) {
         delta =
             abi.decode(manager.lock(abi.encode(CallbackData(Operation.Swap, msg.sender, key, abi.encode(params)))), (BalanceDelta));
 
@@ -45,6 +47,7 @@ contract RouterExample is ILockCallback, IRouterExample {
     function modifyPosition(IPoolManager.PoolKey memory key, IPoolManager.ModifyPositionParams memory params)
         external
         payable
+        onlyOwner
         returns (BalanceDelta delta)
     {
         delta = abi.decode(manager.lock(abi.encode(CallbackData(Operation.ModifyPosition, msg.sender, key, abi.encode(params)))), (BalanceDelta));
@@ -58,17 +61,18 @@ contract RouterExample is ILockCallback, IRouterExample {
     function donate(IPoolManager.PoolKey memory key, uint256 amount0, uint256 amount1)
         external
         payable
+        onlyOwner
         returns (BalanceDelta delta)
     {
         delta = abi.decode(manager.lock(abi.encode(CallbackData(Operation.Donate, msg.sender, key, abi.encode(amount0, amount1)))), (BalanceDelta));
     }
 
-    function mint(Currency currency, uint256 amount) external returns(BalanceDelta delta) {
+    function mint(Currency currency, uint256 amount) external onlyOwner returns(BalanceDelta delta) {
         IPoolManager.PoolKey memory emptyKey; 
         delta = abi.decode(manager.lock(abi.encode(CallbackData(Operation.Mint, msg.sender, emptyKey, abi.encode(currency, amount)))), (BalanceDelta));
     }
     
-    function burn(Currency currency, uint256 amount) external returns(BalanceDelta delta){
+    function burn(Currency currency, uint256 amount) external onlyOwner returns(BalanceDelta delta){
         IPoolManager.PoolKey memory emptyKey;
         delta = abi.decode(manager.lock(abi.encode(CallbackData(Operation.Burn, msg.sender, emptyKey, abi.encode(currency, amount)))), (BalanceDelta));
     } 
