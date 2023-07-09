@@ -10,10 +10,9 @@
         - openzeppelind
 
 - Development
-    - `git clone`
+    - `git clone git@github.com:hungchingliu/Appworks-School-Blockchain-Final-Project.git`
     - `forge install`
     - `forge remappings > remappings.txt`
-    
 
 - Testing
     - `forge test`
