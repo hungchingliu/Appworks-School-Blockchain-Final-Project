@@ -6,7 +6,7 @@ import {BalanceDelta} from "v4-core/types/BalanceDelta.sol";
 import {IERC1155Receiver} from "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import {Currency} from "v4-core/libraries/CurrencyLibrary.sol";
 
-interface IRouter is IERC1155Receiver {
+interface IRouterExample is IERC1155Receiver {
    function swap(
         IPoolManager.PoolKey memory key,
         IPoolManager.SwapParams memory params

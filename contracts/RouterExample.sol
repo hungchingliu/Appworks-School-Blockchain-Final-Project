@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.19;
 
-import {IRouter} from "./interface/IRouter.sol";
+import {IRouterExample} from "./interface/IRouterExample.sol";
 
 import {CurrencyLibrary, Currency} from "v4-core/libraries/CurrencyLibrary.sol";
 import {IERC20Minimal} from "v4-core/interfaces/external/IERC20Minimal.sol";
@@ -11,7 +11,7 @@ import {IPoolManager} from "v4-core/interfaces/IPoolManager.sol";
 import {BalanceDelta} from "v4-core/types/BalanceDelta.sol";
 
 
-contract Router is ILockCallback, IRouter {
+contract RouterExample is ILockCallback, IRouterExample {
     using CurrencyLibrary for Currency;
 
     IPoolManager public immutable manager;

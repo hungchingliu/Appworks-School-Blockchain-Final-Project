@@ -6,8 +6,8 @@ import {PoolManagerSetUp} from "./helper/PoolManagerSetUp.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/libraries/PoolId.sol";
 import {IPoolManager} from "v4-core/interfaces/IPoolManager.sol";
 import {Currency, CurrencyLibrary} from "v4-core/libraries/CurrencyLibrary.sol";
-import {IRouter} from "../contracts/interface/IRouter.sol";
-import {Router} from "../contracts/Router.sol";
+import {IRouterExample} from "../contracts/interface/IRouterExample.sol";
+import {RouterExample} from "../contracts/RouterExample.sol";
 
 contract RouterExampleTest is PoolManagerSetUp {
     using CurrencyLibrary for Currency;
@@ -31,15 +31,15 @@ contract RouterExampleTest is PoolManagerSetUp {
         int256 liquidityDelta
     );
 
-    Router router;
+    RouterExample routerExample;
     
     function setUp() override public {
         super.setUp();
-        router = new Router(poolManager);
+        routerExample = new RouterExample(poolManager);
     }
 
     function testSwapSucceed() public {
-        tokenA.approve(address(router), 100);
+        tokenA.approve(address(routerExample), 100);
         IPoolManager.SwapParams memory params =
             IPoolManager.SwapParams({
                 zeroForOne: true,
@@ -48,14 +48,14 @@ contract RouterExampleTest is PoolManagerSetUp {
             });
         
         vm.expectEmit(true, true, false, true);
-        emit Swap(id, address(router), 100, -98, 79228162514264329749955861424, 1 ether, -1, 3000);
+        emit Swap(id, address(routerExample), 100, -98, 79228162514264329749955861424, 1 ether, -1, 3000);
         
-        IRouter(router).swap(key, params); 
+        IRouterExample(routerExample).swap(key, params); 
     }
 
     function testModifyPositionSucceed() public {
-        tokenA.approve(address(router), 100);
-        tokenB.approve(address(router), 100);
+        tokenA.approve(address(routerExample), 100);
+        tokenB.approve(address(routerExample), 100);
 
         IPoolManager.ModifyPositionParams memory params = 
         IPoolManager.ModifyPositionParams({
@@ -65,31 +65,31 @@ contract RouterExampleTest is PoolManagerSetUp {
         });
 
         vm.expectEmit(true, true, false, true);
-        emit ModifyPosition(id, address(router), 0, 60, 100);
+        emit ModifyPosition(id, address(routerExample), 0, 60, 100);
 
-        IRouter(router).modifyPosition(key, params);
+        IRouterExample(routerExample).modifyPosition(key, params);
     }
 
     function testDonateSucceed() public {
-        tokenA.approve(address(router), 100);
-        tokenB.approve(address(router), 100); 
+        tokenA.approve(address(routerExample), 100);
+        tokenB.approve(address(routerExample), 100); 
 
-        IRouter(router).donate(key, 100, 100);
+        IRouterExample(routerExample).donate(key, 100, 100);
     }
 
     function testMintSucceed() public {
-        tokenA.approve(address(router), 100);
-        IRouter(router).mint(Currency.wrap(address(tokenA)), 100);
+        tokenA.approve(address(routerExample), 100);
+        IRouterExample(routerExample).mint(Currency.wrap(address(tokenA)), 100);
 
-        assertEq(poolManager.balanceOf(address(router), Currency.wrap(address(tokenA)).toId()), 100);
+        assertEq(poolManager.balanceOf(address(routerExample), Currency.wrap(address(tokenA)).toId()), 100);
     }
 
     function testBurnSucceed() public {
-        tokenA.approve(address(router), 100);
-        IRouter(router).mint(Currency.wrap(address(tokenA)), 100);
-        assertEq(poolManager.balanceOf(address(router), Currency.wrap(address(tokenA)).toId()), 100);
+        tokenA.approve(address(routerExample), 100);
+        IRouterExample(routerExample).mint(Currency.wrap(address(tokenA)), 100);
+        assertEq(poolManager.balanceOf(address(routerExample), Currency.wrap(address(tokenA)).toId()), 100);
          
-        IRouter(router).burn(Currency.wrap(address(tokenA)), 100);
-        assertEq(poolManager.balanceOf(address(router), Currency.wrap(address(tokenA)).toId()), 0);
+        IRouterExample(routerExample).burn(Currency.wrap(address(tokenA)), 100);
+        assertEq(poolManager.balanceOf(address(routerExample), Currency.wrap(address(tokenA)).toId()), 0);
     }
 }
