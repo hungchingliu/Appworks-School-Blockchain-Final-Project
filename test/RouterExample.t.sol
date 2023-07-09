@@ -53,7 +53,7 @@ contract RouterExampleTest is PoolManagerSetUp {
         IRouterExample(routerExample).swap(key, params); 
     }
 
-    function testModifyPositionSucceed() public {
+    function testAddLiquiditySucceed() public {
         tokenA.approve(address(routerExample), 100);
         tokenB.approve(address(routerExample), 100);
 
@@ -68,6 +68,41 @@ contract RouterExampleTest is PoolManagerSetUp {
         emit ModifyPosition(id, address(routerExample), 0, 60, 100);
 
         IRouterExample(routerExample).modifyPosition(key, params);
+    }
+
+    function testRemoveLiquiditySucceed() public {
+        tokenA.approve(address(routerExample), 1 ether);
+        tokenB.approve(address(routerExample), 1 ether);
+
+        IPoolManager.ModifyPositionParams memory params = 
+        IPoolManager.ModifyPositionParams({
+            tickLower: 0,
+            tickUpper: 60,
+            liquidityDelta: 1 ether
+        });
+
+        vm.expectEmit(true, true, false, true);
+        emit ModifyPosition(id, address(routerExample), 0, 60, 1 ether);
+
+        IRouterExample(routerExample).modifyPosition(key, params);
+
+        uint256 beforeBalance = tokenA.balanceOf(address(this));
+        params = 
+        IPoolManager.ModifyPositionParams({
+            tickLower: 0,
+            tickUpper: 60,
+            liquidityDelta: -1 ether
+        });
+
+        vm.expectEmit(true, true, false, true);
+        emit ModifyPosition(id, address(routerExample), 0, 60, -1 ether);
+
+        IRouterExample(routerExample).modifyPosition(key, params);
+        
+        uint256 afterBalance = tokenA.balanceOf(address(this));
+
+        console.log(afterBalance, beforeBalance);
+        assertGt(afterBalance, beforeBalance);
     }
 
     function testDonateSucceed() public {
