@@ -21,6 +21,14 @@ contract SwapperTest is PoolManagerSetUp {
         uint24 fee
     );
 
+    event ModifyPosition(
+        PoolId indexed id,
+        address indexed sender,
+        int24 tickLower,
+        int24 tickUpper,
+        int256 liquidityDelta
+    );
+
     Router router;
     
     function setUp() override public {
@@ -31,11 +39,32 @@ contract SwapperTest is PoolManagerSetUp {
     function testSwapSucceed() public {
         tokenA.approve(address(router), 100);
         IPoolManager.SwapParams memory params =
-            IPoolManager.SwapParams({zeroForOne: true, amountSpecified: 100, sqrtPriceLimitX96: SQRT_RATIO_1_2});
+            IPoolManager.SwapParams({
+                zeroForOne: true,
+                amountSpecified: 100,
+                sqrtPriceLimitX96: SQRT_RATIO_1_2
+            });
         
         vm.expectEmit(true, true, false, true);
         emit Swap(id, address(router), 100, -98, 79228162514264329749955861424, 1 ether, -1, 3000);
         
         IRouter(router).swap(key, params); 
+    }
+
+    function testModifyPositionSucceed() public {
+        tokenA.approve(address(router), 100);
+        tokenB.approve(address(router), 100);
+
+        IPoolManager.ModifyPositionParams memory params = 
+        IPoolManager.ModifyPositionParams({
+            tickLower: 0,
+            tickUpper: 60,
+            liquidityDelta: 100
+        });
+
+        vm.expectEmit(true, true, false, true);
+        emit ModifyPosition(id, address(router), 0, 60, 100);
+
+        IRouter(router).modifyPosition(key, params);
     }
 }
