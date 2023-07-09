@@ -5,6 +5,7 @@ import "forge-std/Test.sol";
 import {PoolManagerSetUp} from "./helper/PoolManagerSetUp.sol";
 import {PoolId, PoolIdLibrary} from "v4-core/libraries/PoolId.sol";
 import {IPoolManager} from "v4-core/interfaces/IPoolManager.sol";
+import {Currency} from "v4-core/libraries/CurrencyLibrary.sol";
 import {IRouter} from "../contracts/interface/IRouter.sol";
 import {Router} from "../contracts/Router.sol";
 
@@ -67,4 +68,29 @@ contract SwapperTest is PoolManagerSetUp {
 
         IRouter(router).modifyPosition(key, params);
     }
+
+    function testDonateSucceed() public {
+        tokenA.approve(address(router), 100);
+        tokenB.approve(address(router), 100); 
+
+        //vm.expectEmit(true, true, false, true)
+
+        IRouter(router).donate(key, 100, 100);
+    }
+
+    function testMintSucceed() public {
+        tokenA.approve(address(router), 100);
+        IRouter(router).mint(Currency.wrap(address(tokenA)), 100);
+    }
+
+    function testBurnSucceed() public {
+        tokenA.approve(address(router), 100);
+        IRouter(router).mint(Currency.wrap(address(tokenA)), 100);
+        
+        IRouter(router).burn(Currency.wrap(address(tokenA)), 100);
+    }
+
+    function testGetSwapFeeAfterRemoveLiquidity() public {}
+
+    function testGetDonateFeeAfterRemoveLiquidity() public {}
 }
