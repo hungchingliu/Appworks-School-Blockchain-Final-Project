@@ -1,13 +1,13 @@
 # Appworks-School-Blockchain-Final-Project
 - Description
-    - IRouter, Router encapsulate the primary interactions with Uniswap V4-core, acting as an example for demonstating interactions with Uniswap v4-core
-    - The primary goal of this project is to help user understand Uniswap V4-cre codebase and develop additional functionality on top of it.
+    - The IRouterExample and RouterExample contract serve as a comprehensive demonstration of the core interactions with Uniswap V4-core, showcasing how to interact with Uniswap v4-core.
+    - The primary goal of this project is for learning and understanding Uniswap V4-core codebase.
 
 - Framework
     - Foundry
     - Libraries
         - Uniswap/periphery-next(v4-core, v4-periphery)
-        - openzeppelin ERC20, ownable
+        - openzeppelind
 
 - Development
     - `git clone`
@@ -18,8 +18,33 @@
 - Testing
     - `forge test`
 
+- IRouterExample
+```solidity
+interface IRouterExample is IERC1155Receiver {
+   function swap(
+        IPoolManager.PoolKey memory key,
+        IPoolManager.SwapParams memory params
+    ) external payable returns (BalanceDelta delta);
+
+    function modifyPosition(
+        IPoolManager.PoolKey memory key, 
+        IPoolManager.ModifyPositionParams memory params
+    ) external payable returns (BalanceDelta delta); 
+
+    function donate(
+        IPoolManager.PoolKey memory key,
+        uint256 amount0,
+        uint256 amount1
+    ) external payable returns (BalanceDelta delta);
+
+    function mint(Currency currency, uint256 amount) external returns (BalanceDelta delta);
+    
+    function burn(Currency currency, uint256 amount) external returns (BalanceDelta delta);
+}
+```
 - Usage
-    - Router shows the primary interactions with uniswap v4-core contracts. Other developers could use this contracts as an reference to build more functionalities on top of it.
+    - IRouterExample shows the core interactions with uniswap v4-core contracts. Other developers could use this contract as an reference to build more functionalities on top of it.
+    - Example usage is in `RouterExample.t.sol/RouterExampleTest`
     
 - Learning Efforts
     - Notion Link: https://peppermint-shrimp-418.notion.site/Uniswap-V4-57946223d6ef46139f2f6d093b9e7357?pvs=4
