@@ -11,7 +11,7 @@
     - Foundry
     - Libraries
         - Uniswap/periphery-next(v4-core, v4-periphery)
-        - openzeppelind
+        - openzeppelin
 
 - Development
     - `git clone git@github.com:hungchingliu/Appworks-School-Blockchain-Final-Project.git`
