@@ -92,8 +92,4 @@ contract RouterExampleTest is PoolManagerSetUp {
         IRouter(router).burn(Currency.wrap(address(tokenA)), 100);
         assertEq(poolManager.balanceOf(address(router), Currency.wrap(address(tokenA)).toId()), 0);
     }
-
-    function testGetSwapFeeAfterRemoveLiquidity() public {}
-
-    function testGetDonateFeeAfterRemoveLiquidity() public {}
 }
