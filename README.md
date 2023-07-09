@@ -1,24 +1,25 @@
 # Appworks-School-Blockchain-Final-Project
 - Description
-    - The primary goal of this project is to understand the Uniswap V4 codebase and develop additional functionality on top of it. After brainstorming, I have come up with the following directions:
-        - IUniSwapV4Router for Uniswap V4: This component will encapsulate the primary interactions with Uniswap V4, allowing seamless integration and interaction with the protocol.
-        - Custom Hooks with Customized Functionality: I plan to develop custom hooks that offer personalized functionality.
+    - IRouter, Router encapsulate the primary interactions with Uniswap V4-core, acting as an example for demonstating interactions with Uniswap v4-core
+    - The primary goal of this project is to help user understand Uniswap V4-cre codebase and develop additional functionality on top of it.
 
 - Framework
     - Foundry
-    - Diagrams of Uniswap@v4
-        - Add/Remove Liquidity
-        - Swap
+    - Libraries
+        - Uniswap/periphery-next(v4-core, v4-periphery)
+        - openzeppelin ERC20, ownable
 
 - Development
-    - Include step-by-step instructions on how to set up and run the project.
-        - .env.example
-        - command example
-    - If this project includes BE or FE, provide instructions for those as well.
+    - `git clone`
+    - `forge install`
+    - `forge remappings > remappings.txt`
+    
 
 - Testing
-    - Explain how to run the tests.
-    - [Nice to have] 80% or more coverage.
+    - `forge test`
 
 - Usage
-    - Explain how to use the project and provide examples or code snippets to demonstrate its usage.
+    - Router shows the primary interactions with uniswap v4-core contracts. Other developers could use this contracts as an reference to build more functionalities on top of it.
+    
+- Learning Efforts
+    - Notion Link: https://peppermint-shrimp-418.notion.site/Uniswap-V4-57946223d6ef46139f2f6d093b9e7357?pvs=4
