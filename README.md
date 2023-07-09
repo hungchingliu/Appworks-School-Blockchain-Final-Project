@@ -2,7 +2,11 @@
 - Description
     - The IRouterExample and RouterExample contract serve as a comprehensive demonstration of the core interactions with Uniswap V4-core, showcasing how to interact with Uniswap v4-core.
     - The primary goal of this project is for learning and understanding Uniswap V4-core codebase.
-
+    - Uniswap/v4-core architecture
+      ![UniswapV4 drawio](https://github.com/hungchingliu/Appworks-School-Blockchain-Final-Project/assets/22343567/c4bd9070-e820-43e9-814f-2ec746720195)
+    - Uniswap/v4-core interaction sequence diagram
+       ![UniswapV4-Page-2 drawio](https://github.com/hungchingliu/Appworks-School-Blockchain-Final-Project/assets/22343567/792bb02f-180b-446e-b534-ef8998f2181e)
+      
 - Framework
     - Foundry
     - Libraries
